@@ -1,6 +1,3 @@
-import pygame as pg
-
-
 class GameState:
     def __init__(
         self,
@@ -42,9 +39,6 @@ class GameState:
             assert col == 8, f"Invalid FEN rank {rank_idx + 1}"
 
         return grid
-
-    def _grid_to_fen(self):
-        pass
 
     def get_turn(self):
         return "white" if self.turn == "w" else "black"
@@ -94,5 +88,3 @@ class GameState:
                 rank_str += str(empty_count)
             placement_parts.append(rank_str)
         return "/".join(placement_parts)
-
-        # TODO: Implement piece movement through mouse clicks
