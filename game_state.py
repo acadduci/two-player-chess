@@ -60,7 +60,13 @@ class GameState:
         to_piece = piece_grid[to_row][to_col]
 
         if from_piece == "." or (
-            to_piece != "." and from_piece.lower() == to_piece.lower()
+            to_piece != "."
+            and (
+                from_piece.isupper()
+                and to_piece.isupper()
+                or from_piece.islower()
+                and to_piece.islower()
+            )
         ):
             print("Invalid move: No piece or same color capture")
             return self.board_state

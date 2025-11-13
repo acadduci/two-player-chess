@@ -94,12 +94,10 @@ class Game:
         if self.selected_square is None:
             if piece != ".":
                 self.selected_square = (row, col)
-                print(f"Selected {piece} at {row},{col}")
             else:
                 print("Empty square-no selection")
         else:
             from_row, from_col = self.selected_square
-            print(f"Attempting move: ({from_row}, {from_col}) -> ({row},{col})")
             new_state = self.game_state.make_move(from_row, from_col, row, col)
             self.game_state.update(new_state)
             self.selected_square = None
@@ -125,5 +123,4 @@ class Game:
 
 if __name__ == "__main__":
     game = Game()
-    # print(game.game_state.pieces)
     game.run()
