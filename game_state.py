@@ -1,3 +1,6 @@
+from piece import *
+
+
 class GameState:
     def __init__(
         self,
@@ -19,6 +22,14 @@ class GameState:
         self.en_passant = parts[2]
         self.halfmove = int(parts[4])
         self.fullmove = int(parts[5])
+
+    def _char_to_piece(self, char):
+        color = "white" if char.isupper() else "black"
+        type_map = {
+            "p": Pawn,
+            "r": Rook,
+        }
+        return type_map[char.lower()](color)
 
     def _fen_to_grid(self):
         ranks = self.placement.split("/")
@@ -74,6 +85,15 @@ class GameState:
         ):
             print("Invalid move: No piece or same color capture")
             return self.board_state
+        if (
+            self.turn == "w"
+            and not from_piece.isupper()
+            or self.turn == "b"
+            and from_piece.isupper()
+        ):
+            print("Not your turn!")
+            return self.board_state
+
         piece_grid[to_row][to_col] = from_piece
         piece_grid[from_row][from_col] = "."
 
