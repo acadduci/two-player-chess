@@ -46,6 +46,10 @@ class GameState:
     def get_piece_grid(self):
         return self.pieces
 
+    def change_turn(self):
+        current_turn = self.turn
+        return "w" if current_turn == "b" else "b"
+
     def update(self, new_state=None):
         if new_state:
             self.board_state = new_state
@@ -74,7 +78,9 @@ class GameState:
         piece_grid[from_row][from_col] = "."
 
         new_placement = self._grid_to_placement()
+        self.turn = self.change_turn()
         new_state = f"{new_placement} {self.turn} {self.castling} {self.en_passant} {self.halfmove} {self.fullmove}"
+        print(new_state)
         return new_state
 
     def _grid_to_placement(self):
